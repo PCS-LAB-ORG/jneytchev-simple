@@ -22,4 +22,4 @@ jobs:
           BC_API_KEY: "${{ secrets.BC_API_KEY }}"
         run: |
           echo "All available checks"
-          checkov -l --output-bc-ids
+          checkov -l --output-bc-ids --policy-metadata-filter policy.complianceStandard="ACSC Information Security Manual (ISM)"
