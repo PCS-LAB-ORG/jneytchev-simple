@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    #environment: caterpillar
+    steps:
+      - uses: actions/checkout@v4       
+      - name: Install checkov
+        run: pip install -U checkov
+
+      - name: Get all policies from Prisma
+        env:
+          PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
+          BC_API_KEY: "${{ secrets.BC_API_KEY }}"
+        run: |
+          echo "All available checks"
+          checkov -l --output-bc-ids
