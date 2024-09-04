@@ -28,19 +28,29 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so follow-up steps can access it
       - uses: actions/checkout@v3
 
-      - name: Checkov GitHub Action
-        uses: bridgecrewio/checkov-action@v12
+      # - name: Checkov GitHub Action
+      #   uses: bridgecrewio/checkov-action@v12
+      #   env:
+      #     PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
+      #     BC_API_KEY: "${{ secrets.BC_API_KEY }}"
+      #     INPUT_POLICY_METADATA_FILTER: ${{ ''AWS Well-Architected Framework'' }}
+      #   with:
+      #     # This will add both a CLI output to the console and create a results.sarif file
+      #     output_format: cli,sarif
+      #     output_file_path: console,results.sarif
+      #     prisma-api-url: "${{ env.PRISMA_API_URL }}"
+      #     api-key: "${{ env.BC_API_KEY }}"
+
+      - name: Install checkov
+        run: pip install -U checkov
+
+      - name: Run checkov
         env:
           PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
           BC_API_KEY: "${{ secrets.BC_API_KEY }}"
-          INPUT_POLICY_METADATA_FILTER: ${{ ''AWS Well-Architected Framework'' }}
-        with:
-          # This will add both a CLI output to the console and create a results.sarif file
-          output_format: cli,sarif
-          output_file_path: console,results.sarif
-          prisma-api-url: "${{ env.PRISMA_API_URL }}"
-          api-key: "${{ env.BC_API_KEY }}"
-        
+        run: |
+          echo "--branch main --repo-id ${GITHUB_REPOSITORY} -d . "
+          checkov --branch main --repo-id ${GITHUB_REPOSITORY} -d . --output cli --output sarif --output-file-path console,results.sarif --policy-metadata-filter policy.complianceStandard="AWS Well-Architected Framework"        
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         
