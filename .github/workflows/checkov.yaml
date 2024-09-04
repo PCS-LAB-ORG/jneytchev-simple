@@ -33,7 +33,7 @@ jobs:
         env:
           PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
           BC_API_KEY: "${{ secrets.BC_API_KEY }}"
-          INPUT_POLICY_METADATA_FILTER: ''AWS Well-Architected Framework''
+          INPUT_POLICY_METADATA_FILTER: ${{ ''AWS Well-Architected Framework'' }}
         with:
           # This will add both a CLI output to the console and create a results.sarif file
           output_format: cli,sarif
