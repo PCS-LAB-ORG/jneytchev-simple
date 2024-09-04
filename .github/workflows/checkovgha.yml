@@ -41,7 +41,8 @@ jobs:
           policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
 
       - name: env check
-        run: env | sort
+        run: |
+          env | sort
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
