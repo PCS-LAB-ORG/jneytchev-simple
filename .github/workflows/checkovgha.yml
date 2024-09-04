@@ -35,6 +35,7 @@ jobs:
           PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
           BC_API_KEY: "${{ secrets.BC_API_KEY }}"
         with:
+          repo-id: "${{ env.GITHUB_REPOSITORY }}"
           output_format: cli,sarif
           output_file_path: console,results.sarif
           policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
