@@ -21,12 +21,14 @@ jobs:
 
       - name: Run Prisma Cloud scan
         id: prisma-cloud
-        uses: bridgecrewio/checkov-action@master
+        #uses: bridgecrewio/checkov-action@master
+        uses: bridgecrewio/bridgecrew-action@master 
         env:
           PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
-          BC_API_KEY: "${{ secrets.BC_API_KEY }}"
+          #BC_API_KEY: "${{ secrets.BC_API_KEY }}"
           #INPUT_REPO_ID: "${{ env.GITHUB_REPOSITORY }}"
         with:
+          api-key: ${{ secrets.BC_API_KEY }}
           output_format: cli,sarif
           output_file_path: console,results.sarif
           policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
