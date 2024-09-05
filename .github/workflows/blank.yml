@@ -31,7 +31,7 @@ jobs:
           api-key: ${{ secrets.BC_API_KEY }}
           output_format: cli,sarif
           output_file_path: console,results.sarif
-          policy_metadata_filter: policy.complianceStandard="ACSC Information Security Manual (ISM)"
+          policy_metadata_filter: policy.complianceStandard="AWS Well-Architected Framework"
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
