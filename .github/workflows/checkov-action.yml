@@ -23,7 +23,7 @@ jobs:
         env:
           PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
           BC_API_KEY: "${{ secrets.BC_API_KEY }}"
-          #INPUT_REPO_ID: "${{ env.GITHUB_REPOSITORY }}"
+          BC_SOURCE: 'githubActions'
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
