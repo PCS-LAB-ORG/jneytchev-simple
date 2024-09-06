@@ -20,4 +20,5 @@ jobs:
           PRISMA_API_URL: ${{ secrets.PRISMA_API_URL }}
         with:
           api-key: ${{ secrets.BC_API_KEY }}
-          policy_metadata_filter: policy.label=CIS
+          #policy_metadata_filter: policy.label=CIS
+          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
