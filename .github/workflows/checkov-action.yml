@@ -1,4 +1,4 @@
-name: Prisma Cloud v2
+name: checkov-action
 on:
   pull_request:
   push:
