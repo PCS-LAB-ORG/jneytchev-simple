@@ -21,4 +21,4 @@ jobs:
         with:
           api-key: ${{ secrets.BC_API_KEY }}
           #policy_metadata_filter: policy.label=CIS
-          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
+          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low,policy.complianceStandard="ACSC Information Security Manual (ISM)"
