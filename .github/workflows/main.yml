@@ -1,0 +1,23 @@
+name: Prisma Cloud v2
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+ 
+      - name: Run Prisma Cloud V2
+        id: PrismaCloudV2
+        uses: bridgecrewio/checkov-action@master 
+        env:
+          PRISMA_API_URL: https://api3.prismacloud.io
+        with:
+          api-key: ${{ secrets.BC_API_KEY }}
+          policy_metadata_filter: policy.label=CIS
