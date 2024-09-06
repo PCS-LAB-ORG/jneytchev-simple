@@ -1,39 +1,23 @@
-name: checkov-action
-# https://github.com/bridgecrewio/checkov-action
+name: Prisma Cloud v2
 on:
-  push:
-    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main", "master" ]
-  workflow_dispatch:
+  push:
+    branches:
+      - master
 jobs:
   scan:
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8]
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Run Prisma Cloud scan
-        id: prisma-cloud
-        uses: bridgecrewio/checkov-action@master
+      - uses: actions/checkout@v2
+ 
+      - name: Run Prisma Cloud V2
+        id: PrismaCloudV2
+        uses: bridgecrewio/checkov-action@master 
         env:
-          PRISMA_API_URL: "${{ secrets.PRISMA_API_URL }}"
-          BC_API_KEY: "${{ secrets.BC_API_KEY }}"
-          BC_SOURCE: 'githubActions'
+          PRISMA_API_URL: https://api2.prismacloud.io
         with:
-          output_format: cli,sarif
-          output_file_path: console,results.sarif
-          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        if: success() || failure()
-        with:
-          sarif_file: results.sarif
+          api-key: ${{ secrets.BC_API_KEY }}
+          policy_metadata_filter: policy.label=CIS
