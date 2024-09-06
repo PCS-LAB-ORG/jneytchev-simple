@@ -20,5 +20,11 @@ jobs:
           PRISMA_API_URL: ${{ secrets.PRISMA_API_URL }}
         with:
           api-key: ${{ secrets.BC_API_KEY }}
-          #policy_metadata_filter: policy.label=CIS
-          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low,policy.complianceStandard="ACSC Information Security Manual (ISM)"
+          #YES - policy_metadata_filter: policy.label=CIS
+          #NO - policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low,policy.complianceStandard="ACSC Information Security Manual (ISM)"
+          policy_metadata_filter: policy.complianceStandard=jneytchev-fedramp-low
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
