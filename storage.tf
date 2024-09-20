@@ -18,6 +18,7 @@ resource "azurerm_storage_account" "primary" {
     yor_name  = "primary"
     yor_trace = "fa8006ea-0d4b-43c0-b75b-b7a3830bafcf"
   }
+  allow_nested_items_to_be_public = true
 }
 
 
